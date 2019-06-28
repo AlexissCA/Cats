@@ -8,37 +8,37 @@ import java.util.List;
 @RequiredArgsConstructor
 @RequestMapping("api/cats")
 @RestController
-public class CatsRestController {
+public class CatRestController {
 
     private final CatService catService;
 
     @GetMapping("/id")
-    Cat getOne (@PathVariable Long id) {
+    public Cat getOne (@PathVariable Long id) {
         return catService.findById(id);
     }
 
     @GetMapping
-    List<Cat> getAll () {
+    public List<Cat> getAll () {
         return catService.findAll();
     }
 
     @PostMapping
-    Cat create (Cat cat){
+    public Cat create (@RequestBody Cat cat){
         return catService.save(cat);
     }
 
     @PutMapping("/id")
-    Cat update (@PathVariable Long id, Cat cat) {
+    public Cat update (@PathVariable Long id, @RequestBody Cat cat) {
         return catService.update(id, cat);
     }
 
     @DeleteMapping("/id")
-    void deleteOne (@PathVariable Long id) {
+    public void deleteOne (@PathVariable Long id) {
         catService.deleteOne(id);
     }
 
     @DeleteMapping
-    void deleteAll () {
+    public void deleteAll () {
         catService.deleteAll();
     }
 

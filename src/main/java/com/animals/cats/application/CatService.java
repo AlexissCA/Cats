@@ -28,8 +28,8 @@ public class CatService {
     }
 
     Cat update (Long id, Cat cat) {
-        Cat exisitingCat = findById(id);
-        return save(exisitingCat);
+        findById(id);
+        return save(cat);
     }
 
     void deleteOne (Long id) {
