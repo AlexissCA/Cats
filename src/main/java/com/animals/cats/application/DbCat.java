@@ -9,29 +9,30 @@ import java.time.LocalDate;
 @Builder
 @Table (name = "cats")
 @Entity
-@RequiredArgsConstructor
+@AllArgsConstructor
+@NoArgsConstructor
 public class DbCat {
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private final Long id;
+    private Long id;
     @Column(name = "name", nullable = false)
-    private final String name;
+    private String name;
     @Column (name = "birth_date")
-    private final LocalDate birthDate;
+    private LocalDate birthDate;
     @Column (name = "height_centimeters")
-    private final Integer height;
+    private Integer height;
     @Column (name = "weight_kilograms")
-    private final Double weight;
+    private Double weight;
     @Column (name = "eye_color")
-    private final String eyeColor;
+    private String eyeColor;
     @Column (name = "fur_color")
-    private final String furColor;
+    private String furColor;
     @Column (name = "personality")
-    private final String personality;
+    private String personality;
     @Column (name = "if_polite")
-    private final Boolean polite;
+    private Boolean polite;
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn (name = "race_id")
-    private final DbRace dbRace;
+    private DbRace dbRace;
 }

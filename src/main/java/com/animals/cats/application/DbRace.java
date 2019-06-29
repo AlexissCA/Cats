@@ -1,21 +1,20 @@
 package com.animals.cats.application;
 
-import lombok.Builder;
-import lombok.Data;
-import lombok.RequiredArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 
 @Builder
 @Data
 @Entity
-@RequiredArgsConstructor
+@AllArgsConstructor
+@NoArgsConstructor
 @Table (name = "cat_races")
 public class DbRace {
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private final Integer id;
+    private Integer id;
     @Column(name = "race_name", nullable = false, unique = true)
-    private final String raceName;
+    private String raceName;
 }

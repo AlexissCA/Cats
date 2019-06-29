@@ -12,7 +12,7 @@ public class CatRestController {
 
     private final CatService catService;
 
-    @GetMapping("/id")
+    @GetMapping("/{id}")
     public Cat getOne (@PathVariable Long id) {
         return catService.findById(id);
     }
@@ -27,12 +27,12 @@ public class CatRestController {
         return catService.save(cat);
     }
 
-    @PutMapping("/id")
+    @PutMapping("/{id}")
     public Cat update (@PathVariable Long id, @RequestBody Cat cat) {
         return catService.update(id, cat);
     }
 
-    @DeleteMapping("/id")
+    @DeleteMapping("/{id}")
     public void deleteOne (@PathVariable Long id) {
         catService.deleteOne(id);
     }
