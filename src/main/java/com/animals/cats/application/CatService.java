@@ -3,6 +3,7 @@ package com.animals.cats.application;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -30,6 +31,29 @@ public class CatService {
     Cat update (Long id, Cat cat) {
         findById(id);
         return save(cat);
+    }
+
+    Cat cuteFight(long firstCatId, long secondCatId) {
+        DbCat firstCat = catRepository.findById(firstCatId).get();
+        DbCat secondCat = catRepository.findById(secondCatId).get();
+//        if ("GREEN".equals(firstCat.getEyeColor()) && "BLUE".equals(secondCat.getEyeColor())) {
+//            return Cat.toDto(secondCat);
+//        }
+//        if (firstCat.getBirthDate() != null && secondCat.getBirthDate() != null
+//            && firstCat.getBirthDate().isBefore(secondCat.getBirthDate())) {
+//            return Cat.toDto(secondCat);
+//        }
+//        if ("GREEN".equals(secondCat.getEyeColor()) && !"GREEN".equals(firstCat.getEyeColor())
+//            && secondCat.getBirthDate().isAfter(LocalDate.now().minusYears(1))) {
+//            return Cat.toDto(secondCat);
+//        }
+        if (secondCat.getWeight() < firstCat.getWeight()) {
+            return Cat.toDto(secondCat);
+        }
+        if (firstCat.getFurColor().equals("BLACK") && !secondCat.getFurColor().equals("BLACK")){
+            return Cat.toDto(firstCat);
+        }
+        return Cat.toDto(firstCat);
     }
 
     void deleteOne (Long id) {
