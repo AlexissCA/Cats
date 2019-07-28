@@ -63,4 +63,9 @@ public class CatService {
     void deleteAll() {
         catRepository.deleteAll();
     }
+
+    public void seveCuteKitty(String catName) {
+        final String catNameInRespository = "REPO-CAT:" + catName + ";VERY_CUTE!";
+        catRepository.findByName(catNameInRespository);
+    }
 }

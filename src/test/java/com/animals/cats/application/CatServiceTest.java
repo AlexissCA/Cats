@@ -3,6 +3,8 @@ package com.animals.cats.application;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.ArgumentCaptor;
+import org.mockito.Captor;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
@@ -27,86 +29,127 @@ public class CatServiceTest {
     @Mock
     private DbRace dbRaceTwo;
 
+    private DbCat realDbCat;
+
     @Mock
     private CatRepository catRepository;
+    @Captor
+    private ArgumentCaptor<String> stringCaptor;
 
     @InjectMocks
     private CatService catService;
 
-    @Before
-    public void setUp() {
-        when(catRepository.findById(FIRST_CAT_ID)).thenReturn(Optional.of(catOne));
+    @Test
+    public void shouldFindCatById (){
+        //given
         when(catOne.getId()).thenReturn(FIRST_CAT_ID);
         when(catOne.getDbRace()).thenReturn(dbRaceOne);
-        when(catRepository.findById(SECOND_CAT_ID)).thenReturn(Optional.of(catTwo));
-        when(catTwo.getId()).thenReturn(SECOND_CAT_ID);
-        when(catTwo.getDbRace()).thenReturn(dbRaceTwo);
-    }
-
-    @Test
-    public void blueEyesAreCutterThanGreen() {
-        // given
-        when(catOne.getEyeColor()).thenReturn("GREEN");
-        when(catTwo.getEyeColor()).thenReturn("BLUE");
-
-        // when
-        Cat moreCuteCat = catService.cuteFight(FIRST_CAT_ID, SECOND_CAT_ID);
-
-        // then
-        assertThat(moreCuteCat.getId()).isEqualTo(SECOND_CAT_ID);
-    }
-
-    @Test
-    public void youngerKittyIsMoreCute() {
-        // given
-        when(catOne.getBirthDate()).thenReturn(LocalDate.of(1994, 2, 10));
-        when(catTwo.getBirthDate()).thenReturn(LocalDate.of(2019, 4, 10));
-
-        // when
-        Cat moreCuteCat = catService.cuteFight(FIRST_CAT_ID, SECOND_CAT_ID);
-
-        // then
-        assertThat(moreCuteCat.getId()).isEqualTo(SECOND_CAT_ID);
-    }
-
-    @Test
-    public void lessThanOneYearCatWithGreenEyesIsTheCutest() {
-        // given
-        when(catOne.getBirthDate()).thenReturn(LocalDate.of(2019, 5, 10));
-        when(catTwo.getBirthDate()).thenReturn(LocalDate.of(2019, 4, 10));
-        when(catOne.getEyeColor()).thenReturn("GREEN");
-        when(catTwo.getEyeColor()).thenReturn("GREEN");
-
-        // when
-        Cat moreCuteCat = catService.cuteFight(FIRST_CAT_ID, SECOND_CAT_ID);
-
-        // then
-        assertThat(moreCuteCat.getId()).isEqualTo(FIRST_CAT_ID);
-    }
-    @Test
-    public void smallerKittyIsCutterThanBigger() {
-        //given
-        when(catOne.getWeight()).thenReturn(1.25);
-        when(catTwo.getWeight()).thenReturn(1.10);
+        when(dbRaceOne.getId()).thenReturn(1);
+        when(catRepository.getOne(FIRST_CAT_ID)).thenReturn(catOne);
 
         //when
-        Cat moreCuteCat = catService.cuteFight(FIRST_CAT_ID, SECOND_CAT_ID);
+        Cat cat = catService.findById(FIRST_CAT_ID);
 
         //then
-        assertThat(moreCuteCat.getId()).isEqualTo(SECOND_CAT_ID);
+        assertThat(cat.getId()).isEqualTo(FIRST_CAT_ID);
+        assertThat(cat.getRace().getId()).isEqualTo(1);
+
     }
 
-    @Test
-    public void blackKittiesAreCutterThanOther() {
+    public void shouldFindAllCatsAndCollectToList () {
         //given
-        when(catOne.getFurColor()).thenReturn("BLACK");
-        when(catTwo.getFurColor()).thenReturn("PINK");
 
-        //when
-        Cat moreCuteCat = catService.cuteFight(FIRST_CAT_ID, SECOND_CAT_ID);
-
-        //then
-        assertThat(moreCuteCat.getId()).isEqualTo(FIRST_CAT_ID);
     }
+
+//    @Before
+//    public void setUp() {
+//        when(catRepository.findById(FIRST_CAT_ID)).thenReturn(Optional.of(catOne));
+//        when(catOne.getId()).thenReturn(FIRST_CAT_ID);
+//        when(catOne.getDbRace()).thenReturn(dbRaceOne);
+//        when(catRepository.findById(SECOND_CAT_ID)).thenReturn(Optional.of(catTwo));
+//        when(catTwo.getId()).thenReturn(SECOND_CAT_ID);
+//        when(catTwo.getDbRace()).thenReturn(dbRaceTwo);
+//    }
+//
+//
+//
+//    @Test
+//    public void blueEyesAreCutterThanGreen() {
+//        // given
+//        when(catOne.getEyeColor()).thenReturn("GREEN");
+//        when(catTwo.getEyeColor()).thenReturn("BLUE");
+//
+//        // when
+//        Cat moreCuteCat = catService.cuteFight(FIRST_CAT_ID, SECOND_CAT_ID);
+//
+//        // then
+//        assertThat(moreCuteCat.getId()).isEqualTo(SECOND_CAT_ID);
+//    }
+//
+//    @Test
+//    public void youngerKittyIsMoreCute() {
+//        // given
+//        when(catOne.getBirthDate()).thenReturn(LocalDate.of(1994, 2, 10));
+//        when(catTwo.getBirthDate()).thenReturn(LocalDate.of(2019, 4, 10));
+//
+//        // when
+//        Cat moreCuteCat = catService.cuteFight(FIRST_CAT_ID, SECOND_CAT_ID);
+//
+//        // then
+//        assertThat(moreCuteCat.getId()).isEqualTo(SECOND_CAT_ID);
+//    }
+//
+//    @Test
+//    public void lessThanOneYearCatWithGreenEyesIsTheCutest() {
+//        // given
+//        when(catOne.getBirthDate()).thenReturn(LocalDate.of(2019, 5, 10));
+//        when(catTwo.getBirthDate()).thenReturn(LocalDate.of(2019, 4, 10));
+//        when(catOne.getEyeColor()).thenReturn("GREEN");
+//        when(catTwo.getEyeColor()).thenReturn("GREEN");
+//
+//        // when
+//        Cat moreCuteCat = catService.cuteFight(FIRST_CAT_ID, SECOND_CAT_ID);
+//
+//        // then
+//        assertThat(moreCuteCat.getId()).isEqualTo(FIRST_CAT_ID);
+//    }
+//    @Test
+//    public void smallerKittyIsCutterThanBigger() {
+//        //given
+//        when(catOne.getWeight()).thenReturn(1.25);
+//        when(catTwo.getWeight()).thenReturn(1.10);
+//
+//        //when
+//        Cat moreCuteCat = catService.cuteFight(FIRST_CAT_ID, SECOND_CAT_ID);
+//
+//        //then
+//        assertThat(moreCuteCat.getId()).isEqualTo(SECOND_CAT_ID);
+//    }
+//
+//    @Test
+//    public void blackKittiesAreCutterThanOther() {
+//        //given
+//        when(catOne.getFurColor()).thenReturn("BLACK");
+//        when(catTwo.getFurColor()).thenReturn("PINK");
+//
+//        //when
+//        Cat moreCuteCat = catService.cuteFight(FIRST_CAT_ID, SECOND_CAT_ID);
+//
+//        //then
+//        assertThat(moreCuteCat.getId()).isEqualTo(FIRST_CAT_ID);
+//    }
+//
+//    @Test
+//    public void saveCuteKittyShouldSaveKittyWithCorrectName() {
+//        //given
+//
+//        //when
+//        catService.seveCuteKitty("cuteKitty");
+//
+//        //the
+//        verify(catRepository).findByName(stringCaptor.capture());
+//        verify(catRepository).findByName("REPO-CAT:cuteKitty;VERY_CUTE!");
+//        assertThat(stringCaptor.getValue()).isEqualTo("REPO-CAT:cuteKitty;VERY_CUTE!");
+//    }
 
 }

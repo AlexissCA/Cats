@@ -11,7 +11,7 @@ public class PolimorfizmTest {
         Dog dog2 = new Dog();
         Animal cat = new Cat();
 
-        Assertions.assertThat(dog.sound()).isEqualTo("wuf");
+        Assertions.assertThat(animal.sound()).isEqualTo("none");
         Assertions.assertThat(((Animal)dog).sound()).isEqualTo("wuf");
         Assertions.assertThat(dog2.sound()).isEqualTo("wuf");
         Assertions.assertThat(cat.sound()).isEqualTo("meow");
@@ -52,7 +52,6 @@ public class PolimorfizmTest {
         }
     }
     class Cat extends Animal {
-        @Override
         public String sound() {
             return "meow";
         }
