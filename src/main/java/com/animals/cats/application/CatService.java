@@ -1,14 +1,18 @@
 package com.animals.cats.application;
 
+import com.animals.cats.application.models.Cat;
+import com.animals.cats.application.models.DbCat;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
 @Service
+@Transactional
 public class CatService {
 
     private final CatRepository catRepository;
@@ -25,11 +29,14 @@ public class CatService {
     }
 
     Cat save(Cat cat) {
-        return Cat.toDto(catRepository.save(Cat.toDb(cat)));
+        return Cat.toDto(catRepository.save(Cat.toDao(cat)));
     }
 
     Cat update(Long id, Cat cat) {
-        findById(id);
+        Cat updatedCat = findById(id);
+        if(updatedCat != null) {
+            cat.setId(updatedCat.getId());
+        }
         return save(cat);
     }
 
@@ -62,10 +69,5 @@ public class CatService {
 
     void deleteAll() {
         catRepository.deleteAll();
-    }
-
-    public void seveCuteKitty(String catName) {
-        final String catNameInRespository = "REPO-CAT:" + catName + ";VERY_CUTE!";
-        catRepository.findByName(catNameInRespository);
     }
 }

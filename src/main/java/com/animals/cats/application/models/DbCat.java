@@ -1,4 +1,4 @@
-package com.animals.cats.application;
+package com.animals.cats.application.models;
 
 import lombok.*;
 
@@ -6,11 +6,11 @@ import javax.persistence.*;
 import java.time.LocalDate;
 
 @Data
-@Builder
-@Table (name = "cats")
-@Entity
-@AllArgsConstructor
 @NoArgsConstructor
+@AllArgsConstructor
+@Builder
+@Entity
+@Table (name = "cats")
 public class DbCat {
     @Id
     @Column(name = "id")
@@ -31,8 +31,8 @@ public class DbCat {
     @Column (name = "personality")
     private String personality;
     @Column (name = "if_polite")
-    private Boolean polite;
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn (name = "race_id")
-    private DbRace dbRace;
+    private Boolean ifPolite;
+    @OneToOne
+    @JoinColumn (name = "breed_id")
+    private DbBreed dbBreed;
 }

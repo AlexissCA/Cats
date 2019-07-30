@@ -1,13 +1,14 @@
 package com.animals.cats.application;
 
-import lombok.RequiredArgsConstructor;
+import com.animals.cats.application.models.Cat;
+import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@RequiredArgsConstructor
-@RequestMapping("api/cats")
+@RequestMapping(value= "api/cats")
 @RestController
+@AllArgsConstructor
 public class CatRestController {
 
     private final CatService catService;
