@@ -15,6 +15,7 @@ public class TestDataGenerator {
     public static final Double WEIGHT = 2.5;
     public static final String EYE_COLOR = "green";
     public static final String FUR_COLOR = "black";
+    public static final String FUR_PATTERN = "furPattern";
     public static final String PERSONALITY = "lively, crazy";
     public static final Boolean IF_POLITE = false;
     public static final Integer BREED_ID = 7;
@@ -33,6 +34,7 @@ public class TestDataGenerator {
                 .weight(WEIGHT)
                 .eyeColor(EYE_COLOR)
                 .furColor(FUR_COLOR)
+                .furPattern(FUR_PATTERN)
                 .personality(PERSONALITY)
                 .ifPolite(IF_POLITE)
                 .breed(BREED)
@@ -48,6 +50,7 @@ public class TestDataGenerator {
                 .weight(WEIGHT)
                 .eyeColor(EYE_COLOR)
                 .furColor(FUR_COLOR)
+                .furPattern(FUR_PATTERN)
                 .personality(PERSONALITY)
                 .ifPolite(IF_POLITE)
                 .dbBreed(DB_BREED)

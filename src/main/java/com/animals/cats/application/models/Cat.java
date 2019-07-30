@@ -19,6 +19,7 @@ public class Cat {
     private Double weight;
     private String eyeColor;
     private String furColor;
+    private String furPattern;
     private String personality;
     private Boolean ifPolite;
     private Breed breed;
@@ -32,6 +33,7 @@ public class Cat {
                 .weight(dbCat.getWeight())
                 .eyeColor(dbCat.getEyeColor())
                 .furColor(dbCat.getFurColor())
+                .furPattern(dbCat.getFurPattern())
                 .personality(dbCat.getPersonality())
                 .ifPolite(dbCat.getIfPolite())
                 .breed(dbCat.getDbBreed() != null ? Breed.toDto(dbCat.getDbBreed()) : null)

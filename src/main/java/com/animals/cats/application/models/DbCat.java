@@ -28,6 +28,8 @@ public class DbCat {
     private String eyeColor;
     @Column (name = "fur_color")
     private String furColor;
+    @Column (name = "fur_pattern")
+    private String furPattern;
     @Column (name = "personality")
     private String personality;
     @Column (name = "if_polite")
